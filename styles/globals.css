@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --header-height: 70px;
+}
+
+* {
+  scrollbar-width: thin;
+}
+
+.my_conatainer {
+  @apply mx-auto max-w-[1320px] max-2xl:max-w-[1200px] max-xl:max-w-[1024px];
+}
