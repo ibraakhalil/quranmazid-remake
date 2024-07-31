@@ -1,13 +1,13 @@
-"use client";
-import { useState } from "react";
-import { ListCard } from "../common/list-card";
-import SearchInput from "../common/search-input";
-import Tabs from "../common/tabs";
+'use client';
+import { useState } from 'react';
+import { ListCard } from '../common/list-card';
+import SearchInput from '../common/search-input';
+import Tabs from '../common/tab-buttons';
 
 const AyahSidebar = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const tabArr = [{ label: "Surah" }, { label: "Juz" }, { label: "Para" }];
-  const arr = new Array(96).fill("length");
+  const tabArr = [{ label: 'Surah' }, { label: 'Juz' }, { label: 'Para' }];
+  const arr = new Array(96).fill('length');
 
   return (
     <div className="flex h-full flex-col border-r bg-white ps-4 [--padding-right:24px]">

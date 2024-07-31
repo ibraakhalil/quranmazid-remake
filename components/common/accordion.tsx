@@ -1,13 +1,6 @@
-"use client";
-import {
-  createContext,
-  HTMLAttributes,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import DownArrow from "../svg/DownArrow";
+'use client';
+import { createContext, HTMLAttributes, useContext, useEffect, useRef, useState } from 'react';
+import DownArrow from '../svg/DownArrow';
 
 interface AccordionProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -16,9 +9,7 @@ interface AccordionContextProps {
   setIsActive: (isActive: boolean) => void;
 }
 
-const AccordionContext = createContext<AccordionContextProps | undefined>(
-  undefined,
-);
+const AccordionContext = createContext<AccordionContextProps | undefined>(undefined);
 
 export const Accordion = ({ children }: AccordionProps) => {
   const [isActive, setIsActive] = useState(false);
@@ -33,7 +24,7 @@ export const Accordion = ({ children }: AccordionProps) => {
 Accordion.Trigger = function AccordionTrigger({ children }: AccordionProps) {
   const context = useContext(AccordionContext);
   if (!context) {
-    throw new Error("AccordionTrigger must be used within an Accordion");
+    throw new Error('AccordionTrigger must be used within an Accordion');
   }
   const { isActive, setIsActive } = context;
 
@@ -54,7 +45,7 @@ Accordion.Content = function AccordionContent({ children }: AccordionProps) {
 
   const context = useContext(AccordionContext);
   if (!context) {
-    throw new Error("AccordionContent must be used within an Accordion");
+    throw new Error('AccordionContent must be used within an Accordion');
   }
   const { isActive } = context;
 
@@ -65,10 +56,7 @@ Accordion.Content = function AccordionContent({ children }: AccordionProps) {
   }, []);
 
   return (
-    <div
-      style={{ height: isActive ? clientHeight : "0px" }}
-      className="transition-all duration-200"
-    >
+    <div style={{ height: isActive ? clientHeight : '0px' }} className="transition-all duration-200">
       <div ref={expandRef}>{children}</div>
     </div>
   );

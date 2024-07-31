@@ -1,5 +1,6 @@
-"use client";
-import { HtmlHTMLAttributes, useState } from "react";
+'use client';
+import { cn } from '@/utils/cn';
+import { HtmlHTMLAttributes, useTransition } from 'react';
 
 interface tabtype {
   label: string;
@@ -8,17 +9,17 @@ interface tabtype {
 interface TabsProps extends HtmlHTMLAttributes<HTMLButtonElement> {
   tabs: tabtype[];
   activeTab: number;
-  setActiveTab(i: number): void;
+  handleClick(i: number): void;
 }
 
-const Tabs = ({ tabs, activeTab, setActiveTab }: TabsProps) => {
+export const TabButtons = ({ tabs, activeTab, handleClick }: TabsProps) => {
   return (
     <div className="relative flex h-9 items-center overflow-hidden rounded-full border-2 border-secondary-bg bg-secondary-bg">
       {tabs.map((tab, i) => (
         <button
-          onClick={() => setActiveTab(i)}
+          onClick={() => handleClick(i)}
           key={tab.label}
-          className="z-10 h-full w-full text-sm"
+          className={cn('z-10 h-full w-full min-w-[100px] text-sm duration-300', { 'text-white': activeTab === i })}
         >
           {tab.label}
         </button>
@@ -29,10 +30,8 @@ const Tabs = ({ tabs, activeTab, setActiveTab }: TabsProps) => {
           width: `${100 / tabs.length}%`,
           transform: `translateX(${activeTab * 100}%)`,
         }}
-        className="absolute h-full rounded-full bg-primary-bg duration-200"
+        className="absolute h-full rounded-full bg-primary-bg transition-transform duration-300 ease-in-out"
       />
     </div>
   );
 };
-
-export default Tabs;

@@ -1,12 +1,12 @@
-"use client";
-import { useState } from "react";
-import Tabs from "../common/tabs";
-import { Accordion } from "../common/accordion";
-import SettingSvg from "@/components/svg/SettingSvg";
+'use client';
+import { useState } from 'react';
+import Tabs from '../common/tab-buttons';
+import { Accordion } from '../common/accordion';
+import SettingSvg from '@/components/svg/SettingSvg';
 
 const SettingBar = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const tabArr = [{ label: "Translation" }, { label: "Reading" }];
+  const tabArr = [{ label: 'Translation' }, { label: 'Reading' }];
 
   return (
     <div className="flex h-full flex-col py-4 ps-7 [padding-right:24px]">
