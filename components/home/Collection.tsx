@@ -2,7 +2,7 @@
 import Bookmark from './Bookmark';
 import Pins from './Pins';
 import LastRead from './LastRead';
-import { Tab } from '../test/TabComposition';
+import { Tab } from '../common/tab-composition';
 
 const Collection = () => {
   return (

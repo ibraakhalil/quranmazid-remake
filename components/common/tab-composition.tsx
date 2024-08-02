@@ -1,28 +1,43 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, HTMLAttributes, useTransition, Suspense } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  HTMLAttributes,
+  useTransition,
+  ReactNode,
+  useCallback,
+} from 'react';
 import { TabButtons } from '@/components/common/tab-buttons';
-import dynamic from 'next/dynamic';
 
 type TabItem = {
   label: string;
+  content: ReactNode;
 };
 
 interface TabContextProps {
   activeTabIndex: number;
   handleClick: (index: number) => void;
-  registerTab: (label: string) => void;
+  registerTab: (label: string, content: ReactNode) => void;
   tabs: TabItem[];
+  content: ReactNode;
+  isPending: boolean;
+  // isForward: boolean;
 }
 
 interface TabProps {
   children: React.ReactNode;
 }
 
+interface TabContentProps extends HTMLAttributes<HTMLDivElement> {
+  loadingContent?: ReactNode | string;
+}
+
 interface ContentItemProps extends HTMLAttributes<HTMLDivElement> {
   label: string;
   children: React.ReactNode;
-  loadingContent?: React.ReactNode | null | string;
 }
 
 const TabContext = createContext<TabContextProps | undefined>(undefined);
@@ -39,24 +54,29 @@ export const Tab = ({ children }: TabProps) => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [tabs, setTabs] = useState<TabItem[]>([]);
   const [isPending, startTransition] = useTransition();
+  const [content, setContent] = useState<ReactNode | null>(null);
 
   const handleClick = (i: number) => {
-    startTransition(() => {
-      setActiveTabIndex(i);
-    });
+    setActiveTabIndex(i);
   };
 
-  const registerTab = (label: string) => {
-    setTabs((prevTabs) => {
-      if (!prevTabs.some((tab) => tab.label === label)) {
-        return [...prevTabs, { label }];
+  const registerTab = useCallback((label: string, content: ReactNode) => {
+    setTabs((prev) => {
+      if (!prev.some((tab) => tab.label === label)) {
+        return [...prev, { label, content }];
       }
-      return prevTabs;
+      return prev;
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    startTransition(() => setContent(tabs[activeTabIndex]?.content));
+  }, [activeTabIndex, tabs]);
 
   return (
-    <TabContext.Provider value={{ activeTabIndex, handleClick, registerTab, tabs }}>{children}</TabContext.Provider>
+    <TabContext.Provider value={{ activeTabIndex, handleClick, registerTab, tabs, content, isPending }}>
+      {children}
+    </TabContext.Provider>
   );
 };
 
@@ -69,30 +89,19 @@ Tab.Trigger = function Trigger(props: HTMLAttributes<HTMLDivElement>) {
   );
 };
 
-Tab.Content = function Content({ children, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div {...props}>{children}</div>;
+Tab.Content = function Content({ children, loadingContent, ...props }: TabContentProps) {
+  const { content } = useTabContext();
+  return <div {...props}>{loadingContent || content || children}</div>;
 };
 
-Tab.ContentItem = function ContentItem({ label, loadingContent, children, ...props }: ContentItemProps) {
-  const { activeTabIndex, registerTab, tabs } = useTabContext();
+Tab.ContentItem = function ContentItem({ label, children }: ContentItemProps) {
+  const { registerTab } = useTabContext();
 
   useEffect(() => {
-    registerTab(label);
-  }, [label, registerTab]);
+    registerTab(label, children);
+  }, [label, registerTab, children]);
 
-  const isActive = tabs.findIndex((tab) => tab.label === label) === activeTabIndex;
-
-  if (!isActive) return null;
-
-  const DynamicContent = dynamic(() => Promise.resolve(() => children), {
-    loading: () => <>{loadingContent}</>,
-  });
-
-  return (
-    <div {...props}>
-      <DynamicContent />
-    </div>
-  );
+  return null;
 };
 
 // 'use client';

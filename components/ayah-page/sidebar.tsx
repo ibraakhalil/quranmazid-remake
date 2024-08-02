@@ -1,28 +1,27 @@
 'use client';
-import { useState } from 'react';
-import { ListCard } from '../common/list-card';
-import SearchInput from '../common/search-input';
-import Tabs from '../common/tab-buttons';
+
+import { Tab } from '../common/tab-composition';
+import SurahList from '../home/SurahList';
+import PageList from '../home/PageList';
+import JuzList from '../home/JuzList';
 
 const AyahSidebar = () => {
-  const [activeTab, setActiveTab] = useState(0);
-  const tabArr = [{ label: 'Surah' }, { label: 'Juz' }, { label: 'Para' }];
-  const arr = new Array(96).fill('length');
-
   return (
-    <div className="flex h-full flex-col border-r bg-white ps-4 [--padding-right:24px]">
-      <div className="space-y-3 bg-white py-4 pe-[--padding-right]">
-        <Tabs tabs={tabArr} activeTab={activeTab} setActiveTab={setActiveTab} />
-        <SearchInput className="p-0" />
-      </div>
-      <div className="space-y-2 overflow-y-auto pe-[--padding-right]">
-        {arr.map((item, i) => (
-          <ListCard key={item}>
-            <ListCard.Count count={i} />
-            <ListCard.Title />
-          </ListCard>
-        ))}
-      </div>
+    <div className="flex flex-col overflow-hidden border-r bg-white pe-5 ps-4 [--padding-right:24px]">
+      <Tab>
+        <Tab.Trigger />
+        <Tab.Content>
+          <Tab.ContentItem label="Surah">
+            <SurahList />
+          </Tab.ContentItem>
+          <Tab.ContentItem label="Juz">
+            <JuzList />
+          </Tab.ContentItem>
+          <Tab.ContentItem label="Page">
+            <PageList />
+          </Tab.ContentItem>
+        </Tab.Content>
+      </Tab>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 'use client';
 
-import { Tab } from '../test/TabComposition';
+import { Tab } from '../common/tab-composition';
 import JuzList from './JuzList';
+import PageList from './PageList';
 import SurahList from './SurahList';
 
 const QuranIndexing = () => {
@@ -13,11 +14,14 @@ const QuranIndexing = () => {
           <Tab.Trigger />
         </div>
         <Tab.Content className="mt-5">
-          <Tab.ContentItem label="Surah" loadingContent="loading....">
+          <Tab.ContentItem label="Surah">
             <SurahList />
           </Tab.ContentItem>
-          <Tab.ContentItem label="juz" loadingContent="loading">
+          <Tab.ContentItem label="juz">
             <JuzList />
+          </Tab.ContentItem>
+          <Tab.ContentItem label="page">
+            <PageList />
           </Tab.ContentItem>
         </Tab.Content>
       </Tab>

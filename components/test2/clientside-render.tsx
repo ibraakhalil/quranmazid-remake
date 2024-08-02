@@ -3,14 +3,18 @@ import { TabButtons } from '../common/tab-buttons';
 import { useState, useTransition } from 'react';
 import SurahList from '../home/SurahList';
 import JuzList from '../home/JuzList';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const ClientsideRender = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isPending, startTransition] = useTransition();
   const [content, setContent] = useState(<SurahList />);
+  const [moveForward, setMoveForward] = useState(false);
 
   const handleClick = (index: number) => {
     setActiveTab(index);
+    setMoveForward(index - activeTab > 0 ? true : false);
+
     startTransition(() => {
       switch (index) {
         case 0:
@@ -31,13 +35,23 @@ const ClientsideRender = () => {
 
   return (
     <div>
-      <TabButtons
-        activeTab={activeTab}
-        handleClick={handleClick}
-        tabs={[{ label: 'surah' }, { label: 'juz' }, { label: 'page' }, { label: 'subject' }]}
-      />
-      {isPending && 'Loading...'}
-      <div>{content}</div>
+      <AnimatePresence mode="popLayout">
+        <TabButtons
+          activeTab={activeTab}
+          handleClick={handleClick}
+          tabs={[{ label: 'surah' }, { label: 'juz' }, { label: 'page' }, { label: 'subject' }]}
+          className="min-w-[300px]"
+        />
+        {isPending && 'Loading...'}
+        <motion.div
+          key={activeTab}
+          initial={{ x: moveForward ? 100 : -100 }}
+          animate={{ x: 0 }}
+          transition={{ type: 'tween' }}
+        >
+          {content}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
