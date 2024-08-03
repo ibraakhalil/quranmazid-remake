@@ -1,7 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { Accordion } from '../common/accordion';
 import SettingSvg from '@/components/svg/SettingSvg';
+import { Accordion } from '../common/accordion';
 
 const SettingBar = () => {
   return (

@@ -1,6 +1,6 @@
 'use client';
 import { cn } from '@/utils/cn';
-import { HtmlHTMLAttributes, useTransition } from 'react';
+import { HtmlHTMLAttributes } from 'react';
 
 interface tabtype {
   label: string;

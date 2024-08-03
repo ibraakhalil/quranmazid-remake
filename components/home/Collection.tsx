@@ -1,8 +1,8 @@
 'use client';
-import Bookmark from './Bookmark';
-import Pins from './Pins';
-import LastRead from './LastRead';
 import { Tab } from '../common/tab-composition';
+import Bookmark from './Bookmark';
+import LastRead from './LastRead';
+import Pins from './Pins';
 
 const Collection = () => {
   return (

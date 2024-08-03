@@ -1,9 +1,9 @@
 'use client';
 
 import { Tab } from '../common/tab-composition';
-import SurahList from '../home/SurahList';
-import PageList from '../home/PageList';
 import JuzList from '../home/JuzList';
+import PageList from '../home/PageList';
+import SurahList from '../home/SurahList';
 
 const AyahSidebar = () => {
   return (
