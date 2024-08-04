@@ -1,9 +1,9 @@
 'use client';
-import { TabButtons } from '../common/tab-buttons';
-import { useState, useTransition } from 'react';
-import SurahList from '../home/SurahList';
-import JuzList from '../home/JuzList';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useTransition } from 'react';
+import { TabButtons } from '../common/tab-buttons';
+import JuzList from '../home/JuzList';
+import SurahList from '../home/SurahList';
 
 const ClientsideRender = () => {
   const [activeTab, setActiveTab] = useState(0);

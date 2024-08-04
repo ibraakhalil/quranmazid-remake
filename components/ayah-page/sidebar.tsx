@@ -7,10 +7,10 @@ import SurahList from '../home/SurahList';
 
 const AyahSidebar = () => {
   return (
-    <div className="flex flex-col overflow-hidden border-r bg-white pe-5 ps-4 [--padding-right:24px]">
+    <div className="flex h-full flex-col gap-3 border-r bg-white ps-4 pt-3 [--padding-right:24px]">
       <Tab>
-        <Tab.Trigger />
-        <Tab.Content>
+        <Tab.Trigger className="flex-shrink-0 pe-[--padding-right]" />
+        <Tab.Content className="flex flex-col overflow-hidden">
           <Tab.ContentItem label="Surah">
             <SurahList />
           </Tab.ContentItem>
