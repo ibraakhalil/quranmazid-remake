@@ -27,7 +27,7 @@ Accordion.Trigger = function AccordionTrigger({ children }: AccordionProps) {
     throw new Error('AccordionTrigger must be used within an Accordion');
   }
   const { isActive, setIsActive } = context;
-  
+
   return (
     <div
       onClick={() => setIsActive(!isActive)}
