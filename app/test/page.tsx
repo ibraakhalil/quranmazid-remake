@@ -1,11 +1,12 @@
-import SidebarLayoutTest from '@/components/test/sidebar-layout-test';
+import { SementicTest } from '@/components/test/sementic-test';
 
 const page = () => {
   return (
-    <div className={"flex w-full items-center justify-center bg-gray-200"}>
+    <div className={'flex w-full items-center justify-center bg-gray-200'}>
       {/* <BlogCard /> */}
       {/* <ClientsideRender /> */}
-      <SidebarLayoutTest />
+      {/* <SidebarLayoutTest /> */}
+      <SementicTest />
     </div>
   );
 };

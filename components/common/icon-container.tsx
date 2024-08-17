@@ -1,10 +1,22 @@
-import { HTMLAttributes } from "react";
+import { cn } from '@/utils/cn';
+import { HTMLAttributes } from 'react';
 
-interface IconContainerProps extends HTMLAttributes<HTMLButtonElement> {}
+interface IconContainerProps extends HTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  hover?: boolean;
+}
 
-const IconContainer = ({ children }: IconContainerProps) => {
+const IconContainer = ({ children, hover, className }: IconContainerProps) => {
   return (
-    <button className="flex min-h-9 min-w-9 items-center justify-center rounded-md bg-secondary-bg active:scale-95">
+    <button
+      className={cn(
+        'flex min-h-9 min-w-9 items-center justify-center rounded-md bg-secondary-bg active:scale-95',
+        className,
+        {
+          'rounded-full bg-transparent hover:bg-secondary-bg': hover,
+        },
+      )}
+    >
       {children}
     </button>
   );

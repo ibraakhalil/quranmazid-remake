@@ -11,6 +11,13 @@
   scroll-behavior: smooth;
 }
 
+@font-face {
+    font-family: 'AmiriQuran'; /* Give the font a name */
+    src: url('/fonts/amiri-quran.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .my_conatainer {
   @apply mx-auto max-w-[1320px] max-2xl:max-w-[1200px] max-xl:max-w-[1024px];
 }

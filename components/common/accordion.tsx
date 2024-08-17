@@ -11,6 +11,15 @@ interface AccordionContextProps {
 
 const AccordionContext = createContext<AccordionContextProps | undefined>(undefined);
 
+const useAccordionContext = () => {
+  const context = useContext(AccordionContext);
+  if (!context) {
+    throw new Error('AccordionTrigger must be used within an Accordion');
+  }
+
+  return context;
+};
+
 export const Accordion = ({ children }: AccordionProps) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -21,12 +30,13 @@ export const Accordion = ({ children }: AccordionProps) => {
   );
 };
 
+// Accordion.Item = function AccordionItem({ children, ...props }: HTMLAttributes<HTMLDivElement>) {
+//   const {} = useAccordionContext();
+//   return <div {...props}>{children}</div>;
+// };
+
 Accordion.Trigger = function AccordionTrigger({ children }: AccordionProps) {
-  const context = useContext(AccordionContext);
-  if (!context) {
-    throw new Error('AccordionTrigger must be used within an Accordion');
-  }
-  const { isActive, setIsActive } = context;
+  const { isActive, setIsActive } = useAccordionContext();
 
   return (
     <div
@@ -41,13 +51,8 @@ Accordion.Trigger = function AccordionTrigger({ children }: AccordionProps) {
 
 Accordion.Content = function AccordionContent({ children }: AccordionProps) {
   const expandRef = useRef<HTMLDivElement>(null);
-  const [clientHeight, setClientHeight] = useState(0);
-
-  const context = useContext(AccordionContext);
-  if (!context) {
-    throw new Error('AccordionContent must be used within an Accordion');
-  }
-  const { isActive } = context;
+  const [clientHeight, setClientHeight] = useState(expandRef.current?.clientHeight);
+  const { isActive } = useAccordionContext();
 
   useEffect(() => {
     if (expandRef.current) {
@@ -57,7 +62,9 @@ Accordion.Content = function AccordionContent({ children }: AccordionProps) {
 
   return (
     <div style={{ height: isActive ? clientHeight : '0px' }} className="transition-all duration-200">
-      <div ref={expandRef}>{children}</div>
+      <div className="bg-red-600" ref={expandRef}>
+        {children}
+      </div>
     </div>
   );
 };

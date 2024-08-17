@@ -1,5 +1,4 @@
 'use client';
-
 import { Tab } from '../common/tab-composition';
 import JuzList from '../home/JuzList';
 import PageList from '../home/PageList';

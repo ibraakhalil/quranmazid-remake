@@ -1,4 +1,4 @@
-import StoreProvider from '@/store/StoreProvider';
+import StoreProvider from '@/store/store-utils/store-provider';
 import Header from '@/components/home/Header';
 import LeftSidebar from '@/components/common/left-sidebar';
 import RightSidebar from '@/components/common/right-sidebar';

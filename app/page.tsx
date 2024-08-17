@@ -1,7 +1,7 @@
 import Collection from '@/components/home/Collection';
 import Header from '@/components/home/Header';
 import Hero from '@/components/home/Hero';
-import QuranIndexing from '@/components/home/QuranIndexing';
+import QuranIndex from '@/components/home/QuranIndex';
 import Search from '@/components/home/Search';
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
         <Hero />
         <Search />
         <Collection />
-        <QuranIndexing />
+        <QuranIndex />
       </main>
     </div>
   );

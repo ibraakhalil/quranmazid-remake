@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 
 export const CollectionCard = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
-  return <div className="min-w-[250px] rounded-lg border bg-gray-100 p-4">{children}</div>;
+  return <div {...props} className="min-w-[250px] rounded-lg border bg-gray-100 p-4">{children}</div>;
 };
 
 CollectionCard.Icon = function CollectionIcon({ children, ...props }: HTMLAttributes<HTMLDivElement>) {

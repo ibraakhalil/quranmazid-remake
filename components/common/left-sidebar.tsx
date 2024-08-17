@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import AyahSidebar from '../ayah-page/sidebar';
+import AyahSidebar from '../ayah-page/ayah-sidebar';
 
 interface LeftSidebarProps extends HTMLAttributes<HTMLDivElement> {}
 

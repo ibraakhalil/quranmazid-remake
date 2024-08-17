@@ -1,48 +1,24 @@
-import { HTMLAttributes } from "react";
-import IconContainer from "../common/icon-container";
-import SettingSvg from "../svg/SettingSvg";
+import { HTMLAttributes, ReactNode } from 'react';
+import FontSizeWrapper from '../test/fontsize';
+import { AyahActionBar } from './ayah-action-bar';
 
 interface AyahCardProps extends HTMLAttributes<HTMLDivElement> {}
-interface ContentProps extends HTMLAttributes<HTMLDivElement> {}
+interface ContentProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+}
 
 export const AyahCard = ({ children }: AyahCardProps) => {
-  return <div className="flex gap-x-5 border-b py-5">{children}</div>;
+  return (
+    <FontSizeWrapper>
+      <div className="flex gap-x-5 border-b py-5">{children}</div>
+    </FontSizeWrapper>
+  );
 };
 
 AyahCard.ActionBar = function ActionBar() {
-  return (
-    <div className="flex min-w-12 flex-col items-center gap-y-2">
-      <IconContainer>
-        <SettingSvg />
-      </IconContainer>
-      <IconContainer>
-        <SettingSvg />
-      </IconContainer>
-      <IconContainer>
-        <SettingSvg />
-      </IconContainer>
-      <IconContainer>
-        <SettingSvg />
-      </IconContainer>
-    </div>
-  );
+  return <AyahActionBar />;
 };
 
-AyahCard.Content = function AyahContent({ children }: ContentProps) {
-  return <div className="w-full">{children}</div>;
+AyahCard.Content = function AyahContent({ children, ...props }: ContentProps) {
+  return <div {...props}>{children}</div>;
 };
-
-export function ArabicContent() {
-  return (
-    <div className="text-justify">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, magni
-      provident. Neque, accusantium laborum. Voluptate, assumenda fuga
-      temporibus quisquam ratione sunt sequi dolores error iste, deserunt
-      aliquam, praesentium in. Iusto.
-    </div>
-  );
-}
-
-export function AyahTranslation() {
-  return <div className="">Translation</div>;
-}
